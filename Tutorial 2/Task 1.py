@@ -28,11 +28,11 @@ P_prior2 = 0.5
 
 
 # calculating the evidence terms
-p_x1 = (p_prior1*p_x_w1) + (p_prior1*p_x_w2)
-p_x2 = (P_prior2*p_x_w1) + (P_prior2*p_x_w2)
+evidence_1 = (p_prior1*p_x_w1) + (p_prior1*p_x_w2)
+evidence_2 = (P_prior2*p_x_w1) + (P_prior2*p_x_w2)
 
-P_pos1 = (p_x_w1*0.5)/p_x1
-P_pos2 = (p_x_w2*0.5)/p_x2
+P_pos1 = (p_x_w1*0.5)/evidence_1
+P_pos2 = (p_x_w2*0.5)/evidence_2
 
 fig, ax = plt.subplots()
 plt.title('Posterior')
