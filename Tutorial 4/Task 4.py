@@ -4,13 +4,14 @@ import matplotlib.pyplot as plt
 import sys
 
 #points in the grid
-npx, npy = 10, 10
+npx, npy = 200, 200
 
 # function to generate the grid 
 def gen_sample_grid(npx=200, npy=200, limit = 1):
   x1line = np.linspace(0, limit, npx)
   x2line = np.linspace(0, limit, npy)
   x1grid, x2grid = np.meshgrid(x1line, x2line)
+  print(x1grid.shape)
   Xgrid = np.array([x1grid, x2grid]).reshape([2,npx*npy]).T
   return Xgrid, x1line, x2line
 
@@ -42,13 +43,14 @@ if Xgrid.shape != (npx*npy,2):
 #  print("Error!! Shape of %d is incorrect", )
 
 # y is a [1,x1,x2,x1*x2] so add 1 at the start of each value
-x1_x2 = Xgrid[:,1]*Xgrid[:,0]
-x1_x2 = np.reshape(x1_x2,[npx*npy,1])
+x1_x2 = Xgrid[:,0]*Xgrid[:,1]
+#x1_x2 = np.reshape(x1_x2,[npx*npy,1])
+x1_x2 = np.array(x1_x2).T
 print('x12 shape',np.shape(x1_x2))
 
-Ygrid = np.concatenate([np.ones([npx * npy,1]), Xgrid],axis=1)
-Ygrid = np.concatenate([Ygrid, x1_x2],axis=1)
-print(Ygrid)
+Ygrid = np.concatenate([np.ones([npx * npy,1]), Xgrid, x1_x2],axis=1)
+#Ygrid = np.concatenate([Ygrid, x1_x2],axis=1)
+
 #Ygrid = np.concatenate([[x1line*x2line],Xgrid],axis=2)
 
 # calculate each of the five functions as before
